@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder();
-
 builder.Services.AddHealthChecks()
     .AddCheck("Toggle Check", new ToggleCheck())
     .AddCheck("Another Check", () =>
@@ -11,13 +10,11 @@ builder.Services.AddHealthChecks()
     });
 
 var app = builder.Build();
-
 app.MapGet("/", () => "Hello World!");
 app.MapHealthChecks("/health");
-
 app.Run();
 
-public class ToggleCheck : IHealthCheck
+class ToggleCheck : IHealthCheck
 {
     bool healthy = true;
 
